@@ -1,0 +1,58 @@
+{
+  "users": [
+    {
+      "email": "admin1@gmail.com",
+      "password": "$2a$10$2h6o0mmmLNRx2f7ZBpiKv..tKb3ruUm2ql1YP8bm/.RLnxnvPOMa2",
+      "id": 1
+    },
+    {
+      "email": "admin2@gmail.com",
+      "password": "$2a$10$0Zono.8X1/4mtlZmUxq.u.lb7rC0wBLzV4x6M2vHwcYeZ5TGaURpC",
+      "id": 2
+    }
+  ],
+  "products": [
+    {
+      "nameProduct": "product1",
+      "price": "32000",
+      "des": "very good!",
+      "id": 1
+    },
+    {
+      "nameProduct": "product2",
+      "price": "343234234",
+      "des": "dvfđfg",
+      "id": 2
+    },
+    {
+      "nameProduct": "product3",
+      "price": "35435435",
+      "des": "ggrrth",
+      "id": 3
+    },
+    {
+      "nameProduct": "product4",
+      "price": "454543",
+      "des": "dsfdsfsd",
+      "id": 4
+    },
+    {
+      "nameProduct": "product3",
+      "price": "35435435",
+      "des": "ggrrth",
+      "id": 5
+    },
+    {
+      "nameProduct": "product4",
+      "price": "454543",
+      "des": "dsfdsfsd",
+      "id": 6
+    },
+    {
+      "nameProduct": "effe",
+      "price": "325353",
+      "des": "vdsvs",
+      "id": 7
+    }
+  ]
+}
