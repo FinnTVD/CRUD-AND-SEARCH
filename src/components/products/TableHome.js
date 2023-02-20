@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { setCheckDataForm, setIdEdit } from "./../../reducer/actions";
+import { setAlert, setCheckDataForm, setIdEdit } from "./../../reducer/actions";
 import { StateContext } from "../../context/ContextApp";
 
 import Table from "@mui/material/Table";
@@ -11,6 +11,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
+import { deleteSuccess } from "./../../variable/table";
 
 export default function TableHome({
 	dataTable,
@@ -31,21 +32,38 @@ export default function TableHome({
 				method: "DELETE",
 			});
 			dispatch(setCheckDataForm(!state.checkDataForm));
+			dispatch(
+				setAlert({
+					severity: "success",
+					open: true,
+					message: deleteSuccess,
+				})
+			);
 		} catch (err) {
 			throw new Error(err);
 		}
 	};
 
 	return (
-		<TableContainer component={Paper}>
+		<TableContainer className="dark:bg-[#313030]" component={Paper}>
 			<Table sx={{ minWidth: 650 }} aria-label="simple table">
 				<TableHead>
 					<TableRow>
-						<TableCell align="right">ID</TableCell>
-						<TableCell align="right">nameProduct</TableCell>
-						<TableCell align="right">Price</TableCell>
-						<TableCell align="right">Description</TableCell>
-						<TableCell align="right">Action</TableCell>
+						<TableCell align="center" className="dark:!text-light">
+							ID
+						</TableCell>
+						<TableCell align="center" className="dark:!text-light">
+							nameProduct
+						</TableCell>
+						<TableCell align="center" className="dark:!text-light">
+							Price
+						</TableCell>
+						<TableCell align="center" className="dark:!text-light">
+							Description
+						</TableCell>
+						<TableCell align="center" className="dark:!text-light">
+							Action
+						</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -53,19 +71,39 @@ export default function TableHome({
 						dataTable.map((e) => {
 							return (
 								<TableRow key={e.id}>
-									<TableCell align="right">{e.id}</TableCell>
-									<TableCell align="right">
+									<TableCell
+										align="center"
+										className="dark:!text-light"
+									>
+										{e.id}
+									</TableCell>
+									<TableCell
+										align="center"
+										className="dark:!text-light"
+									>
 										{e.nameProduct}
 									</TableCell>
-									<TableCell align="right">
+									<TableCell
+										align="center"
+										className="dark:!text-light"
+									>
 										{e.price}
 									</TableCell>
-									<TableCell align="right">{e.des}</TableCell>
-									<TableCell align="right">
+									<TableCell
+										align="center"
+										className="dark:!text-light"
+									>
+										{e.des}
+									</TableCell>
+									<TableCell
+										align="center"
+										className="dark:!text-light"
+									>
 										<Button
 											onClick={() => handleEditForm(e.id)}
 											variant="contained"
 											color="success"
+											className="!mr-4"
 										>
 											Edit
 										</Button>
@@ -73,7 +111,7 @@ export default function TableHome({
 											onClick={() =>
 												handleDeleteForm(e.id)
 											}
-											variant="outlined"
+											variant="contained"
 											color="error"
 										>
 											Delete

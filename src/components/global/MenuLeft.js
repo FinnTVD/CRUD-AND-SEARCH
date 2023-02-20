@@ -28,6 +28,7 @@ const MenuLeft = ({ toggle, setToggle }) => {
 
 	const list = (anchor) => (
 		<Box
+			className="dark:bg-darkMode h-screen"
 			sx={{
 				width: anchor === "top" || anchor === "bottom" ? "auto" : 250,
 			}}
@@ -40,8 +41,8 @@ const MenuLeft = ({ toggle, setToggle }) => {
 					(text, index) => (
 						<LinkRouter key={index} to={`${text}`}>
 							<ListItem key={text} disablePadding>
-								<ListItemButton>
-									<ListItemIcon>
+								<ListItemButton className="dark:!text-light">
+									<ListItemIcon className="dark:!text-light">
 										{index % 2 === 0 ? (
 											<InboxIcon />
 										) : (
@@ -55,12 +56,12 @@ const MenuLeft = ({ toggle, setToggle }) => {
 					)
 				)}
 			</List>
-			<Divider />
+			<Divider className="dark:!bg-light" />
 			<List>
 				{["All mail", "Trash", "Spam"].map((text, index) => (
 					<ListItem key={text} disablePadding>
-						<ListItemButton>
-							<ListItemIcon>
+						<ListItemButton className="dark:!text-light">
+							<ListItemIcon className="dark:!text-light">
 								{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
 							</ListItemIcon>
 							<ListItemText primary={text} />

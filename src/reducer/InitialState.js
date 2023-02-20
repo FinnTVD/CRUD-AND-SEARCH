@@ -9,4 +9,6 @@ export const initialState = {
 	idEdit: 0,
 	paginationCheck: 1,
 	searchNameProduct: "",
+	emailUser: "",
+	imageAvatar: "",
 };

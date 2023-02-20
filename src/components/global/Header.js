@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Link as LinkRouter, Outlet } from "react-router-dom";
+import { Link as LinkRouter, Outlet, useNavigate } from "react-router-dom";
 
-import { setAlert } from "../../reducer/actions";
+import { setAlert, setImageAvatar } from "../../reducer/actions";
 import { StateContext } from "../../context/ContextApp";
 
 import { styled, alpha } from "@mui/material/styles";
@@ -20,9 +20,13 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import HomeIcon from "@mui/icons-material/Home";
+
 import MenuLeft from "./MenuLeft";
 import { setSearchNameProduct } from "./../../reducer/actions";
-import { debounce } from "../../hooks/useDebounce";
+import ToggleDarkMode from "./ToggleDarkMode";
+
+import useDarkMode from "./../../hooks/useDarkMode";
 
 const Search = styled("div")(({ theme }) => ({
 	position: "relative",
@@ -66,6 +70,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Header() {
 	const [state, dispatch] = StateContext();
+	const [darkMode, setDarkMode] = useDarkMode();
+
+	const navigate = useNavigate();
 
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -73,6 +80,8 @@ export default function Header() {
 
 	const isMenuOpen = Boolean(anchorEl);
 	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+	React.useEffect(() => {}, [state.imageAvatar]);
 
 	const handleProfileMenuOpen = (event) => {
 		setAnchorEl(event.currentTarget);
@@ -82,13 +91,30 @@ export default function Header() {
 		setMobileMoreAnchorEl(null);
 	};
 
-	const handleMenuClose = () => {
+	const handleMenuClose = (e) => {
+		changeURL(e.target.innerText);
 		setAnchorEl(null);
 		handleMobileMenuClose();
 	};
 
+	const changeURL = (paragraph = "") => {
+		paragraph = paragraph.trim().toLowerCase().replaceAll(" ", "-");
+		navigate(`/${paragraph}`);
+	};
+
 	const handleMobileMenuOpen = (event) => {
 		setMobileMoreAnchorEl(event.currentTarget);
+	};
+
+	const handleLogOut = () => {
+		dispatch(
+			setAlert({
+				severity: "",
+				open: false,
+				message: "",
+			})
+		);
+		dispatch(setImageAvatar(null));
 	};
 
 	const menuId = "primary-search-account-menu";
@@ -111,19 +137,7 @@ export default function Header() {
 			<MenuItem onClick={handleMenuClose}>Profile</MenuItem>
 			<MenuItem onClick={handleMenuClose}>My account</MenuItem>
 			<LinkRouter to="/login">
-				<MenuItem
-					onClick={() => {
-						dispatch(
-							setAlert({
-								severity: "",
-								open: false,
-								message: "",
-							})
-						);
-					}}
-				>
-					Log out
-				</MenuItem>
+				<MenuItem onClick={handleLogOut}>Log out</MenuItem>
 			</LinkRouter>
 		</Menu>
 	);
@@ -177,7 +191,15 @@ export default function Header() {
 					aria-haspopup="true"
 					color="inherit"
 				>
-					<AccountCircle />
+					{state.imageAvatar ? (
+						<img
+							src={state.imageAvatar}
+							className="inline-block w-[48px] h-[48px] object-cover rounded-full"
+							alt=""
+						/>
+					) : (
+						<AccountCircle />
+					)}
 				</IconButton>
 				<p>Profile</p>
 			</MenuItem>
@@ -215,7 +237,7 @@ export default function Header() {
 								component="div"
 								sx={{ display: { xs: "none", sm: "block" } }}
 							>
-								MUI
+								<HomeIcon />
 							</Typography>
 						</LinkRouter>
 						<Search onChange={(e) => handleSearch(e)}>
@@ -229,6 +251,12 @@ export default function Header() {
 						</Search>
 						<Box sx={{ flexGrow: 1 }} />
 						<Box sx={{ display: { xs: "none", md: "flex" } }}>
+							<IconButton>
+								<ToggleDarkMode
+									darkMode={darkMode}
+									onClick={() => setDarkMode(!darkMode)}
+								/>
+							</IconButton>
 							<IconButton
 								size="large"
 								aria-label="show 4 new mails"
@@ -256,7 +284,15 @@ export default function Header() {
 								onClick={handleProfileMenuOpen}
 								color="inherit"
 							>
-								<AccountCircle />
+								{state.imageAvatar ? (
+									<img
+										src={state.imageAvatar}
+										className="inline-block w-[36px] h-[36px] object-cover rounded-full"
+										alt=""
+									/>
+								) : (
+									<AccountCircle />
+								)}
 							</IconButton>
 						</Box>
 						<Box sx={{ display: { xs: "flex", md: "none" } }}>

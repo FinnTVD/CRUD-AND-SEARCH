@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Link as LinkRouter } from "react-router-dom";
 
 import { StateContext } from "../context/ContextApp";
-import { setDataAccount, setAlert } from "./../reducer/actions";
+import { setDataAccount, setAlert, setEmailUser } from "./../reducer/actions";
 import MessageAlert from "../components/global/MessageAlert";
 import { errorLogin, successLogin } from "../variable/authen";
 
@@ -49,6 +49,7 @@ export default function Login() {
 							message: successLogin,
 						})
 					);
+					dispatch(setEmailUser(data.get("email")));
 					navigate("/");
 					return res.json();
 				} else {
@@ -162,7 +163,10 @@ export default function Login() {
 								</Grid>
 								<Grid item>
 									<LinkRouter to="/register">
-										{"Don't have an account? Sign Up"}
+										{"Don't have an account?"}{" "}
+										<span className="text-blue-600 underline">
+											Sign Up
+										</span>
 									</LinkRouter>
 								</Grid>
 							</Grid>

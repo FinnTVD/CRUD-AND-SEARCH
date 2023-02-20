@@ -21,7 +21,7 @@ const MessageAlert = () => {
 	return (
 		<Snackbar
 			open={state.alert.open}
-			autoHideDuration={4000}
+			autoHideDuration={3000}
 			anchorOrigin={{ vertical, horizontal }}
 			onClose={handleClose}
 		>

@@ -9,6 +9,26 @@
       "email": "admin2@gmail.com",
       "password": "$2a$10$0Zono.8X1/4mtlZmUxq.u.lb7rC0wBLzV4x6M2vHwcYeZ5TGaURpC",
       "id": 2
+    },
+    {
+      "email": "admin@gmail.com",
+      "password": "$2a$10$y1petJiV.cdliQyEZgrKBu8Rsf9MbDREBgZ7pGkq1AfJC./1kcGlG",
+      "id": 3
+    },
+    {
+      "email": "admin3@gmail.com",
+      "password": "$2a$10$16osS0m9SpVMI2RC2D2Qm.LP89pTob8DhlSvB.gzXBHO4N8WHAva.",
+      "id": 4
+    },
+    {
+      "email": "admin07@gmail.com",
+      "password": "$2a$10$QlD5htF7P0PUtQzmpk2GFeD1TDWuloZmpAZHx.uL6B3vdPQljaDoy",
+      "id": 5
+    },
+    {
+      "email": "admin08@gmail.com",
+      "password": "$2a$10$c16OyliGRGsJM.eOeex6WecyGVCMBi3SEDk.tncOotrLJKbdzIrkq",
+      "id": 6
     }
   ],
   "products": [
@@ -37,22 +57,22 @@
       "id": 4
     },
     {
-      "nameProduct": "product3",
+      "nameProduct": "product6",
       "price": "35435435",
       "des": "ggrrth",
       "id": 5
     },
     {
-      "nameProduct": "product4",
-      "price": "454543",
-      "des": "dsfdsfsd",
-      "id": 6
+      "nameProduct": "tesst1",
+      "price": "343243432",
+      "des": "ddsfsdsafdsfdsfdsfsfs",
+      "id": 8
     },
     {
-      "nameProduct": "effe",
-      "price": "325353",
-      "des": "vdsvs",
-      "id": 7
+      "nameProduct": "sxs",
+      "price": "44543543",
+      "des": "",
+      "id": 9
     }
   ]
 }

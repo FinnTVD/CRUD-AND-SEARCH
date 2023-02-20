@@ -44,6 +44,16 @@ export const reducer = (state, action) => {
 				...state,
 				searchNameProduct: action.payload,
 			};
+		case "SET_EMAIL_USER":
+			return {
+				...state,
+				emailUser: action.payload,
+			};
+		case "SET_IMAGE_AVATAR":
+			return {
+				...state,
+				imageAvatar: action.payload,
+			};
 		default:
 			console.log("default");
 	}

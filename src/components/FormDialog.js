@@ -117,7 +117,7 @@ export default function FormDialog({ open, handleClose, dataTable, action }) {
 								margin="dense"
 								id="price"
 								label="Price"
-								type="email"
+								type="number"
 								fullWidth
 								variant="standard"
 								value={dataInput.price}

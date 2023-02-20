@@ -46,3 +46,16 @@ export const setSearchNameProduct = (payload) => {
 		payload,
 	};
 };
+
+export const setEmailUser = (payload) => {
+	return {
+		type: "SET_EMAIL_USER",
+		payload,
+	};
+};
+export const setImageAvatar = (payload) => {
+	return {
+		type: "SET_IMAGE_AVATAR",
+		payload,
+	};
+};

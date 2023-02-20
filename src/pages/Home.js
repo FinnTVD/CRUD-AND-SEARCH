@@ -8,9 +8,9 @@ import { setIdEdit } from "./../reducer/actions";
 import TableHome from "./../components/products/TableHome";
 
 import { Button, Grid } from "@mui/material";
-import MessageAlert from "../components/global/MessageAlert";
 import BasicPagination from "./../components/global/Pagination";
 import useDebounce from "../hooks/useDebounce";
+import { getImageAvatar } from "./../utils/getImageAvatar";
 
 const Home = () => {
 	const [state, dispatch] = StateContext();
@@ -20,14 +20,17 @@ const Home = () => {
 	const [open, setOpen] = React.useState(false);
 	const [action, setAction] = React.useState("");
 
+	const demo = useDebounce(state.searchNameProduct, 500);
+
 	const getDataForm = async () => {
+		const weightPage = 5;
 		try {
 			const res = await fetch("http://localhost:3000/products");
 			const data = await res.json();
 			const res1 = await fetch(
 				state.searchNameProduct
 					? `http://localhost:3000/products?nameProduct=${state.searchNameProduct}&_page=${state.paginationCheck}&_limit=5`
-					: `http://localhost:3000/products?_page=${state.paginationCheck}&_limit=5`
+					: `http://localhost:3000/products?_page=${state.paginationCheck}&_limit=${weightPage}`
 			);
 			const data1 = await res1.json();
 			setLengthPage(Math.ceil(data.length / 5));
@@ -39,11 +42,9 @@ const Home = () => {
 
 	const navigate = useNavigate();
 	useEffect(() => {
-		if (state.alert.severity !== "success") {
-			navigate("/login");
-		}
+		if (state.alert.severity !== "success") return navigate("/login");
+		getImageAvatar(state, dispatch);
 	}, []);
-	const demo = useDebounce(state.searchNameProduct, 500);
 
 	useEffect(() => {
 		getDataForm();
@@ -68,11 +69,13 @@ const Home = () => {
 			<h1 sx={{ mt: 10 }}>HOME</h1>
 			<Grid container xs={12}>
 				<ContainerApp maxWidth="xl">
-					<Grid item xs={12}>
-						<Button variant="contained" onClick={handleAddForm}>
-							Add
-						</Button>
-					</Grid>
+					<Button
+						className="!mb-4"
+						variant="contained"
+						onClick={handleAddForm}
+					>
+						Add
+					</Button>
 					<TableHome
 						dataTable={dataTable}
 						handleClickOpenDialog={handleClickOpenDialog}
@@ -80,7 +83,7 @@ const Home = () => {
 					/>
 				</ContainerApp>
 			</Grid>
-			<div className="flex justify-center mt-5">
+			<div className="fixed bottom-10 left-2/4 -translate-x-2/4 !text-light">
 				<BasicPagination lengthPage={lengthPage} />
 			</div>
 			<FormDialog
@@ -90,7 +93,6 @@ const Home = () => {
 				setDataTable={setDataTable}
 				action={action}
 			/>
-			<MessageAlert />
 		</>
 	);
 };
